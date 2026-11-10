@@ -17,13 +17,13 @@ in
     stateVersion = "26.05"; # Please read the comment before changing.
 
     packages = with pkgs; [
+      wget2
       tinymist
       nil
     ];
   };
 
   programs = {
-    yt-dlp.enable = true;
     uv.enable = true;
     opencode.enable = true;
     ty.enable = true;
@@ -75,6 +75,11 @@ in
           email = "mirzafarisalarifin0@gmail.com";
         };
       };
+    };
+
+    yt-dlp = {
+      enable = true;
+      settings.parse-metadata = "playlist_index:%(track_number)s";
     };
   };
 }

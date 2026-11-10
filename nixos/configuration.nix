@@ -12,10 +12,12 @@
 
   boot.initrd.luks.devices."luks-e124ef31-622e-4ecb-a501-bcfa18416620".device =
     "/dev/disk/by-uuid/e124ef31-622e-4ecb-a501-bcfa18416620";
-  networking.hostName = "uzi"; # Define your hostname.
 
-  # Enable networking
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "uzi"; # Define your hostname.
+    networkmanager.enable = true;
+    firewall.trustedInterfaces = [ "virbr0" ];
+  };
 
   # Set your time zone.
   time.timeZone = "Asia/Jakarta";
@@ -27,7 +29,9 @@
   users.users."fr" = {
     isNormalUser = true;
     description = "fr";
+
     extraGroups = [
+      "libvirtd"
       "networkmanager"
       "wheel"
     ];
@@ -55,6 +59,7 @@
       };
 
       packages = [
+        "io.github.mrvladus.List"
         "net.donnybeelo.Convey"
         "com.brave.Browser"
         "io.github.focustimerhq.FocusTimer"
@@ -80,6 +85,9 @@
     nautilus
     gnome-disk-utility
   ];
+
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
   system.stateVersion = "26.05"; # Did you read the comment?
 }
