@@ -17,13 +17,18 @@ in
     stateVersion = "26.05"; # Please read the comment before changing.
 
     packages = with pkgs; [
+      colmena
       wget2
-      tinymist
-      nil
     ];
   };
 
+  gtk = {
+    enable = true;
+    gtk3.colorScheme = "dark";
+  };
+
   programs = {
+    direnv.enable = true;
     uv.enable = true;
     opencode.enable = true;
     ty.enable = true;
@@ -43,6 +48,8 @@ in
       };
 
       languages.language = mkLanguageList [
+        "c"
+        "cpp"
         "typst"
         "nix"
         "python"
@@ -57,6 +64,7 @@ in
     fish = {
       enable = true;
       functions.fish_greeting = "";
+      shellAliases.ssh = "ghostty +ssh --";
     };
 
     ghostty = {

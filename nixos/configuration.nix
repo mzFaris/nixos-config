@@ -31,6 +31,7 @@
     description = "fr";
 
     extraGroups = [
+      "dialout"
       "libvirtd"
       "networkmanager"
       "wheel"
